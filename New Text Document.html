@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANYAL — The Series | Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        netflixRed: '#E50914',
+                        netflixDark: '#141414',
+                        netflixCard: '#1f1f1f',
+                        netflixGray: '#808080',
+                    },
+                    fontFamily: {
+                        bebas: ['"Bebas Neue"', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .heading-font {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1.5px;
+        }
+        /* Custom scrollbar for horizontal carousels */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .netflix-gradient {
+            background: linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0.8) 70%, rgba(10,10,10,1) 100%);
+        }
+        .hero-vignette {
+            background: linear-gradient(77deg, rgba(0,0,0,0.9) 15%, rgba(0,0,0,0.6) 45%, rgba(0,0,0,0) 70%),
+                        linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(10,10,10,0.8) 85%, #0a0a0a 100%);
+        }
+        .card-scale {
+            transition: transform 0.3s cubic-bezier(0.13, 1.1, 0.3, 1), box-shadow 0.3s ease;
+        }
+        .card-scale:hover {
+            transform: scale(1.06) translateY(-6px);
+            z-index: 50;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7);
+        }
+        .profile-card {
+            transition: all 0.3s ease;
+        }
+        .profile-card:hover {
+            transform: scale(1.05);
+            border-color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0a] text-white selection:bg-netflixRed selection:text-white">
+
+    <!-- ================= SCREEN 1: WHO'S WATCHING? ================= -->
+    <div id="profile-screen" class="fixed inset-0 z-50 bg-[#141414] flex flex-col items-center justify-center p-4 transition-opacity duration-700">
+        <div class="text-center mb-10 space-y-3">
+            <h1 class="heading-font text-5xl sm:text-7xl tracking-widest text-white">Who's Watching?</h1>
+            <p class="text-netflixGray text-sm sm:text-base">Select your viewing mode to explore Danyal's portfolio</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl w-full px-4">
+            <!-- Profile 1: Danyal (Full Story) -->
+            <div onclick="selectProfile('danyal')" class="profile-card group cursor-pointer flex flex-col items-center space-y-4 p-4 rounded-xl border-4 border-transparent hover:border-white bg-[#1f1f1f]/50">
+                <div class="relative w-32 h-32 sm:w-40 sm:h-40 rounded-md overflow-hidden border-2 border-transparent group-hover:border-white shadow-2xl">
+                    <img src="../uploads/1000316458.png" alt="Danyal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <span class="heading-font text-xl sm:text-2xl text-netflixGray group-hover:text-white tracking-wider">Danyal (Full Series)</span>
+            </div>
+
+            <!-- Profile 2: Recruiter -->
+            <div onclick="selectProfile('recruiter')" class="profile-card group cursor-pointer flex flex-col items-center space-y-4 p-4 rounded-xl border-4 border-transparent hover:border-white bg-[#1f1f1f]/50">
+                <div class="relative w-32 h-32 sm:w-40 sm:h-40 rounded-md overflow-hidden border-2 border-transparent group-hover:border-white shadow-2xl bg-gradient-to-br from-blue-900 to-indigo-950 flex items-center justify-center">
+                    <i data-lucide="briefcase" class="w-16 h-16 text-blue-300"></i>
+                </div>
+                <span class="heading-font text-xl sm:text-2xl text-netflixGray group-hover:text-white tracking-wider">Recruiter Mode</span>
+            </div>
+
+            <!-- Profile 3: Client -->
+            <div onclick="selectProfile('client')" class="profile-card group cursor-pointer flex flex-col items-center space-y-4 p-4 rounded-xl border-4 border-transparent hover:border-white bg-[#1f1f1f]/50">
+                <div class="relative w-32 h-32 sm:w-40 sm:h-40 rounded-md overflow-hidden border-2 border-transparent group-hover:border-white shadow-2xl bg-gradient-to-br from-amber-900 to-amber-950 flex items-center justify-center">
+                    <i data-lucide="shopping-bag" class="w-16 h-16 text-amber-300"></i>
+                </div>
+                <span class="heading-font text-xl sm:text-2xl text-netflixGray group-hover:text-white tracking-wider">Client & Agency</span>
+            </div>
+        </div>
+
+        <div class="mt-16">
+            <button onclick="selectProfile('danyal')" class="px-8 py-2.5 border border-netflixGray text-netflixGray hover:text-white hover:border-white text-sm uppercase tracking-widest transition-colors">
+                Manage Profiles
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= MAIN PORTFOLIO APP ================= -->
+    <div id="main-app" class="opacity-0 transition-opacity duration-1000">
+
+        <!-- Navigation Bar -->
+        <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500 bg-gradient-to-b from-black/90 via-black/50 to-transparent px-4 sm:px-12 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="heading-font text-netflixRed text-3xl sm:text-4xl tracking-wider">DANYAL</a>
+                <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
+                    <a href="#" class="hover:text-white transition-colors text-white font-semibold">Home</a>
+                    <a href="#seasons" class="hover:text-white transition-colors">Seasons & Journey</a>
+                    <a href="#projects" class="hover:text-white transition-colors">Projects</a>
+                    <a href="#skills" class="hover:text-white transition-colors">Skills & Stack</a>
+                    <a href="#certifications" class="hover:text-white transition-colors">Certifications</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="openSearchModal()" class="text-white hover:text-netflixRed transition-colors p-2">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </button>
+                <button onclick="switchProfile()" class="flex items-center gap-2 bg-[#1f1f1f] hover:bg-zinc-800 px-3 py-1.5 rounded text-xs border border-zinc-700 transition-colors">
+                    <i data-lucide="user-cog" class="w-4 h-4 text-netflixRed"></i>
+                    <span id="active-profile-badge" class="hidden sm:inline">Profile</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- ================= SCREEN 2: HERO BANNER ================= -->
+        <header class="relative h-[85vh] sm:h-[90vh] w-full flex items-center hero-vignette">
+            <!-- Background Image with Dark Overlay -->
+            <div class="absolute inset-0 -z-10 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1920&auto=format&fit=crop" alt="Code background" class="w-full h-full object-cover opacity-35 scale-105 animate-pulse duration-[10000ms]">
+                <div class="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-12 w-full pt-20 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <span class="bg-netflixRed text-white text-xs font-bold px-2.5 py-1 rounded tracking-widest uppercase">Series</span>
+                        <span class="heading-font tracking-widest text-netflixGray text-xl">N S E R I E S</span>
+                    </div>
+
+                    <h1 class="heading-font text-6xl sm:text-8xl lg:text-9xl tracking-tight leading-none text-white drop-shadow-lg">
+                        DANYAL
+                    </h1>
+
+                    <div class="flex flex-wrap items-center gap-3 text-sm font-medium text-gray-300">
+                        <span class="text-green-500 font-bold">99% Match</span>
+                        <span>2026 Release</span>
+                        <span class="border border-gray-600 px-1.5 py-0.5 text-xs">U/A 16+</span>
+                        <span>4 Seasons</span>
+                        <span class="bg-zinc-800 px-2 py-0.5 text-xs rounded text-amber-400 font-semibold">Entrepreneur & Dev</span>
+                    </div>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl font-light leading-relaxed">
+                        Based in Rawalpindi/Islamabad, Pakistan. Full-Stack Developer, Entrepreneur, and Graphic Designer building high-impact web applications, automated institute workflows, and scaling e-commerce brands like D'eeura & Techoo Tech.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4 pt-4">
+                        <a href="#projects" class="flex items-center gap-3 bg-white hover:bg-gray-200 text-black px-6 sm:px-8 py-3 rounded font-bold text-lg transition-transform hover:scale-105">
+                            <i data-lucide="play" class="w-6 h-6 fill-current"></i> Play Projects
+                        </a>
+                        <button onclick="openInfoModal()" class="flex items-center gap-3 bg-zinc-600/80 hover:bg-zinc-600 text-white px-6 sm:px-8 py-3 rounded font-bold text-lg backdrop-blur-sm transition-transform hover:scale-105">
+                            <i data-lucide="info" class="w-6 h-6"></i> More Info
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Portrait preview on right -->
+                <div class="hidden lg:block lg:col-span-4 relative">
+                    <div class="relative w-72 h-96 mx-auto rounded-xl overflow-hidden shadow-2xl border-2 border-zinc-800 group">
+                        <img src="1000316458.png" alt="Danyal Portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-center">
+                            <span class="text-xs uppercase tracking-widest text-netflixRed font-bold">Starring Danyal</span>
+                            <p class="heading-font text-xl">Full-Stack Engineer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ================= SCREEN 3: CONTINUE EXPLORING / CATEGORIES ================= -->
+        <section class="py-8 px-4 sm:px-12 -mt-16 relative z-20 space-y-12">
+            <!-- Continue Exploring Row -->
+            <div>
+                <h2 class="heading-font text-2xl sm:text-3xl text-white mb-4 flex items-center justify-between">
+                    <span>Continue Exploring</span>
+                    <span class="text-xs text-netflixGray font-sans font-normal tracking-normal cursor-pointer hover:text-white" onclick="scrollToSection('seasons')">See All Seasons &rarr;</span>
+                </h2>
+                <div class="relative group">
+                    <div id="explore-carousel" class="flex gap-4 overflow-x-auto no-scrollbar pb-6 pt-2 scroll-smooth">
+                        <!-- Card 1 -->
+                        <div onclick="scrollToSection('skills')" class="flex-none w-64 sm:w-72 h-36 sm:h-40 bg-zinc-900 rounded-lg overflow-hidden relative card-scale cursor-pointer border border-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-40">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-4 flex flex-col justify-end">
+                                <span class="text-xs text-netflixRed font-bold uppercase tracking-wider">Top 10 in Tech</span>
+                                <h3 class="heading-font text-xl">My Skills & Stack</h3>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div onclick="scrollToSection('projects')" class="flex-none w-64 sm:w-72 h-36 sm:h-40 bg-zinc-900 rounded-lg overflow-hidden relative card-scale cursor-pointer border border-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-40">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-4 flex flex-col justify-end">
+                                <span class="text-xs text-green-500 font-bold uppercase tracking-wider">Trending Now</span>
+                                <h3 class="heading-font text-xl">Featured Projects</h3>
+                            </div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div onclick="openBusinessModal()" class="flex-none w-64 sm:w-72 h-36 sm:h-40 bg-zinc-900 rounded-lg overflow-hidden relative card-scale cursor-pointer border border-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-40">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-4 flex flex-col justify-end">
+                                <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">E-Commerce</span>
+                                <h3 class="heading-font text-xl">My Businesses (D'eeura & Techoo)</h3>
+                            </div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div onclick="scrollToSection('seasons')" class="flex-none w-64 sm:w-72 h-36 sm:h-40 bg-zinc-900 rounded-lg overflow-hidden relative card-scale cursor-pointer border border-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-40">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-4 flex flex-col justify-end">
+                                <span class="text-xs text-blue-400 font-bold uppercase tracking-wider">Biography</span>
+                                <h3 class="heading-font text-xl">My Journey (4 Seasons)</h3>
+                            </div>
+                        </div>
+                        <!-- Card 5 -->
+                        <div onclick="openContactModal()" class="flex-none w-64 sm:w-72 h-36 sm:h-40 bg-zinc-900 rounded-lg overflow-hidden relative card-scale cursor-pointer border border-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1423784346385-c1d4dac9093a?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-40">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-4 flex flex-col justify-end">
+                                <span class="text-xs text-netflixRed font-bold uppercase tracking-wider">Let's Connect</span>
+                                <h3 class="heading-font text-xl">Contact & Hire</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SECTION: MY JOURNEY (SEASONS & EPISODES) ================= -->
+            <section id="seasons" class="space-y-6 pt-8">
+                <div class="flex items-center justify-between">
+                    <h2 class="heading-font text-3xl sm:text-4xl text-white">My Journey — Seasons & Episodes</h2>
+                    <select id="season-selector" onchange="changeSeason(this.value)" class="bg-zinc-900 text-white border border-zinc-700 px-4 py-2 rounded font-sans text-sm focus:outline-none focus:border-netflixRed">
+                        <option value="1">Season 1: The Beginning</option>
+                        <option value="2">Season 2: Learning to Build</option>
+                        <option value="3">Season 3: Building Businesses</option>
+                        <option value="4" selected>Season 4: Growing Skills & AKTI</option>
+                    </select>
+                </div>
+
+                <!-- Season Episodes Grid -->
+                <div id="episodes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic Episodes will load here -->
+                </div>
+            </section>
+
+            <!-- ================= SECTION: PROJECTS ================= -->
+            <section id="projects" class="space-y-6 pt-12">
+                <h2 class="heading-font text-3xl sm:text-4xl text-white">Featured Projects & Productions</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Project 1 -->
+                    <div onclick="openProjectModal('deeaura')" class="bg-zinc-900 rounded-xl overflow-hidden card-scale cursor-pointer border border-zinc-800 group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-netflixRed text-white text-xs font-bold px-2.5 py-1 rounded">Live Site</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center justify-between text-xs text-gray-400">
+                                <span class="text-green-500 font-bold">98% Match</span>
+                                <span>E-Commerce</span>
+                            </div>
+                            <h3 class="heading-font text-2xl text-white">D'eeura Perfume Store</h3>
+                            <p class="text-gray-400 text-sm line-clamp-2">Premium perfume store selling Arabian and European brands (Lattafa, Armaf, Afnan, Rasasi, Khadlaj) with Cash on Delivery across Pakistan.</p>
+                            <div class="pt-2 flex items-center gap-2">
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Netlify</span>
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">E-Commerce</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div onclick="openProjectModal('techoo')" class="bg-zinc-900 rounded-xl overflow-hidden card-scale cursor-pointer border border-zinc-800 group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1585060544812-6b45742d762f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded">Retail & Daraz</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center justify-between text-xs text-gray-400">
+                                <span class="text-green-500 font-bold">95% Match</span>
+                                <span>Multi-Channel</span>
+                            </div>
+                            <h3 class="heading-font text-2xl text-white">Techoo Tech Store</h3>
+                            <p class="text-gray-400 text-sm line-clamp-2">Phone accessories business featuring a physical retail shop, Daraz seller account, and dedicated WordPress website.</p>
+                            <div class="pt-2 flex items-center gap-2">
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">WordPress</span>
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Daraz API</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div onclick="openProjectModal('whatsapp')" class="bg-zinc-900 rounded-xl overflow-hidden card-scale cursor-pointer border border-zinc-800 group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1611746872915-64382b5c76da?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">AKTI Tool</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center justify-between text-xs text-gray-400">
+                                <span class="text-green-500 font-bold">97% Match</span>
+                                <span>Automation</span>
+                            </div>
+                            <h3 class="heading-font text-2xl text-white">WhatsApp Lead-Capture Bot</h3>
+                            <p class="text-gray-400 text-sm line-clamp-2">Automated WhatsApp lead-capture bot built for Arfa Karim Technology Incubator (AKTI) to handle student course inquiries.</p>
+                            <div class="pt-2 flex items-center gap-2">
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Python</span>
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">WhatsApp API</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div onclick="openProjectModal('automation')" class="bg-zinc-900 rounded-xl overflow-hidden card-scale cursor-pointer border border-zinc-800 group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-purple-600 text-white text-xs font-bold px-2.5 py-1 rounded">Python Scripts</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center justify-between text-xs text-gray-400">
+                                <span class="text-green-500 font-bold">96% Match</span>
+                                <span>Productivity</span>
+                            </div>
+                            <h3 class="heading-font text-2xl text-white">Institute Automation Tools</h3>
+                            <p class="text-gray-400 text-sm line-clamp-2">Document generation & automation scripts for AKTI: attendance tracker, admission officers' sheets, and FAQ sheet automation.</p>
+                            <div class="pt-2 flex items-center gap-2">
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Python</span>
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Excel/Sheets</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div onclick="openProjectModal('meta')" class="bg-zinc-900 rounded-xl overflow-hidden card-scale cursor-pointer border border-zinc-800 group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-pink-600 text-white text-xs font-bold px-2.5 py-1 rounded">Marketing</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center justify-between text-xs text-gray-400">
+                                <span class="text-green-500 font-bold">94% Match</span>
+                                <span>Ad Campaigns</span>
+                            </div>
+                            <h3 class="heading-font text-2xl text-white">Meta Lead-Gen Poster Ads</h3>
+                            <p class="text-gray-400 text-sm line-clamp-2">High-converting Facebook & Instagram poster advertisement designs and targeted digital marketing campaigns.</p>
+                            <div class="pt-2 flex items-center gap-2">
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Graphic Design</span>
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Meta Ads</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div onclick="openProjectModal('media')" class="bg-zinc-900 rounded-xl overflow-hidden card-scale cursor-pointer border border-zinc-800 group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded">Video & Design</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center justify-between text-xs text-gray-400">
+                                <span class="text-green-500 font-bold">99% Match</span>
+                                <span>Media Production</span>
+                            </div>
+                            <h3 class="heading-font text-2xl text-white">AKTI Promo Videos & Posters</h3>
+                            <p class="text-gray-400 text-sm line-clamp-2">Cinematic promotional videos, brand identity posters, and creative media assets for Arfa Karim Technology Incubator.</p>
+                            <div class="pt-2 flex items-center gap-2">
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Video Editing</span>
+                                <span class="text-xs bg-zinc-800 text-gray-300 px-2 py-1 rounded">Branding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= SECTION: SKILLS & STACK ================= -->
+            <section id="skills" class="space-y-6 pt-12">
+                <h2 class="heading-font text-3xl sm:text-4xl text-white">Skills & Technical Stack</h2>
+                <div class="space-y-4 max-w-4xl">
+                    <!-- Skill Row 1 -->
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('skill-1')" class="w-full p-6 text-left flex items-center justify-between hover:bg-zinc-800/50 transition-colors">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="globe" class="w-6 h-6 text-netflixRed"></i>
+                                <span class="heading-font text-xl sm:text-2xl">Web Development & CMS</span>
+                            </div>
+                            <i data-lucide="chevron-down" id="icon-skill-1" class="w-5 h-5 text-gray-400 transition-transform"></i>
+                        </button>
+                        <div id="content-skill-1" class="hidden px-6 pb-6 text-gray-300 border-t border-zinc-800/60 pt-4 space-y-3">
+                            <p>Expertise in building responsive, lightning-fast websites and custom e-commerce stores.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">HTML5</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">CSS3</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">JavaScript</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">WordPress</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Elementor Pro</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Row 2 -->
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('skill-2')" class="w-full p-6 text-left flex items-center justify-between hover:bg-zinc-800/50 transition-colors">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="terminal" class="w-6 h-6 text-netflixRed"></i>
+                                <span class="heading-font text-xl sm:text-2xl">Programming & Automation</span>
+                            </div>
+                            <i data-lucide="chevron-down" id="icon-skill-2" class="w-5 h-5 text-gray-400 transition-transform"></i>
+                        </button>
+                        <div id="content-skill-2" class="hidden px-6 pb-6 text-gray-300 border-t border-zinc-800/60 pt-4 space-y-3">
+                            <p>Building Python automation tools for administrative workflows, document generation, and messaging bots.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Python</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Document Generation</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Attendance & Sheet Automation</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">WhatsApp Bots</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Row 3 -->
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('skill-3')" class="w-full p-6 text-left flex items-center justify-between hover:bg-zinc-800/50 transition-colors">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="palette" class="w-6 h-6 text-netflixRed"></i>
+                                <span class="heading-font text-xl sm:text-2xl">Graphic Design & Video Editing</span>
+                            </div>
+                            <i data-lucide="chevron-down" id="icon-skill-3" class="w-5 h-5 text-gray-400 transition-transform"></i>
+                        </button>
+                        <div id="content-skill-3" class="hidden px-6 pb-6 text-gray-300 border-t border-zinc-800/60 pt-4 space-y-3">
+                            <p>Creating compelling brand identity posters, high-converting ad creatives, and promotional video edits.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Graphic Design</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Poster & Ad Creation</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Video Editing</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Branding</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Row 4 -->
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('skill-4')" class="w-full p-6 text-left flex items-center justify-between hover:bg-zinc-800/50 transition-colors">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="trending-up" class="w-6 h-6 text-netflixRed"></i>
+                                <span class="heading-font text-xl sm:text-2xl">Digital Marketing & SEO</span>
+                            </div>
+                            <i data-lucide="chevron-down" id="icon-skill-4" class="w-5 h-5 text-gray-400 transition-transform"></i>
+                        </button>
+                        <div id="content-skill-4" class="hidden px-6 pb-6 text-gray-300 border-t border-zinc-800/60 pt-4 space-y-3">
+                            <p>Trained in professional digital marketing strategies, search engine optimization, and paid social ads.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">SEO</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Meta Ads (Facebook & Instagram)</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Lead Generation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Row 5 -->
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('skill-5')" class="w-full p-6 text-left flex items-center justify-between hover:bg-zinc-800/50 transition-colors">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="cpu" class="w-6 h-6 text-netflixRed"></i>
+                                <span class="heading-font text-xl sm:text-2xl">Hardware & E-Commerce Operations</span>
+                            </div>
+                            <i data-lucide="chevron-down" id="icon-skill-5" class="w-5 h-5 text-gray-400 transition-transform"></i>
+                        </button>
+                        <div id="content-skill-5" class="hidden px-6 pb-6 text-gray-300 border-t border-zinc-800/60 pt-4 space-y-3">
+                            <p>Hands-on hardware repair and end-to-end e-commerce business operations management.</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">iPhone Hardware Repair</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">E-Commerce Logistics</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Cash on Delivery Operations</span>
+                                <span class="bg-zinc-800 px-3 py-1.5 rounded text-sm font-medium">Daraz Seller Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= SECTION: CERTIFICATIONS ================= -->
+            <section id="certifications" class="space-y-6 pt-12">
+                <h2 class="heading-font text-3xl sm:text-4xl text-white">Certifications & Awards</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cert 1 -->
+                    <div class="bg-gradient-to-br from-zinc-900 to-black border-2 border-amber-500/80 rounded-xl p-6 relative overflow-hidden shadow-xl card-scale">
+                        <div class="absolute top-0 right-0 bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-bl">2024</div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500 flex items-center justify-center text-amber-400">
+                                <i data-lucide="award" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="heading-font text-2xl text-white">PNY Training Institute</h3>
+                                <p class="text-amber-400 text-xs">Professional Certification</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm">Completed intensive professional training in Web Development, Freelancing, and Graphic Design.</p>
+                    </div>
+
+                    <!-- Cert 2 -->
+                    <div class="bg-gradient-to-br from-zinc-900 to-black border-2 border-amber-500/80 rounded-xl p-6 relative overflow-hidden shadow-xl card-scale">
+                        <div class="absolute top-0 right-0 bg-amber-500 text-black text-xs font-bold px-3 py-1 rounded-bl">2025</div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500 flex items-center justify-center text-amber-400">
+                                <i data-lucide="badge-check" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="heading-font text-2xl text-white">NAVTTC</h3>
+                                <p class="text-amber-400 text-xs">Government Certification</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm">Advanced Digital Marketing & SEO certification program mastering modern online growth tactics.</p>
+                    </div>
+
+                    <!-- Cert 3 -->
+                    <div class="bg-gradient-to-br from-zinc-900 to-black border-2 border-zinc-700 rounded-xl p-6 relative overflow-hidden shadow-xl card-scale opacity-75">
+                        <div class="absolute top-0 right-0 bg-zinc-700 text-white text-xs font-bold px-3 py-1 rounded-bl">Upcoming</div>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 rounded-full bg-zinc-800 border border-zinc-600 flex items-center justify-center text-gray-400">
+                                <i data-lucide="star" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="heading-font text-2xl text-white">Continuous Learner</h3>
+                                <p class="text-gray-400 text-xs">Next Chapter</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-400 text-sm">Always upgrading skills in full-stack architecture, automation, and digital scaling.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= FINAL SCREEN ================= -->
+            <footer class="mt-24 border-t border-zinc-800 pt-16 pb-24 text-center space-y-8">
+                <h2 class="heading-font text-5xl sm:text-7xl text-netflixRed tracking-wider animate-pulse">TO BE CONTINUED…</h2>
+                <div class="space-y-2">
+                    <h3 class="heading-font text-3xl text-white">Danyal</h3>
+                    <p class="text-gray-400">Entrepreneur | Full-Stack Web Developer | Graphic Designer</p>
+                    <p class="text-xs text-netflixGray">Rawalpindi / Islamabad, Pakistan</p>
+                </div>
+
+                <div class="flex justify-center gap-4 pt-4">
+                    <button onclick="openContactModal()" class="bg-netflixRed hover:bg-red-700 text-white px-8 py-3.5 rounded font-bold text-lg shadow-lg shadow-netflixRed/30 transition-transform hover:scale-105 flex items-center gap-2">
+                        <i data-lucide="send" class="w-5 h-5"></i> Let's Build Together
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 pt-6 text-sm text-gray-400">
+                    <a href="mailto:danyal@example.com" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-netflixRed"></i> Email Me</a>
+                    <a href="https://wa.me/923000000000" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4 text-netflixRed"></i> WhatsApp</a>
+                    <a href="https://linkedin.com" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="linkedin" class="w-4 h-4 text-netflixRed"></i> LinkedIn</a>
+                    <a href="https://github.com" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="github" class="w-4 h-4 text-netflixRed"></i> GitHub</a>
+                    <a href="https://instagram.com" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i data-lucide="instagram" class="w-4 h-4 text-netflixRed"></i> Instagram</a>
+                </div>
+
+                <p class="text-xs text-zinc-600 pt-8">&copy; 2026 DANYAL — The Series. Inspired by cinematic streaming interfaces.</p>
+            </footer>
+        </section>
+    </div>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- Info / Series Overview Modal -->
+    <div id="info-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl max-w-2xl w-full p-6 sm:p-8 relative space-y-6 animate-in fade-in zoom-in duration-300">
+            <button onclick="closeInfoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="flex items-center gap-3">
+                <span class="bg-netflixRed text-white text-xs font-bold px-2.5 py-1 rounded">About Series</span>
+                <span class="text-green-500 font-bold text-sm">99% Match</span>
+            </div>
+            <h2 class="heading-font text-4xl text-white">DANYAL — The Series Overview</h2>
+            <p class="text-gray-300 leading-relaxed">
+                Welcome to Danyal's cinematic portfolio. Based in Rawalpindi and Islamabad, Danyal is a multi-talented entrepreneur, full-stack web developer, and graphic designer. From founding premium e-commerce brands like <strong class="text-white">D'eeura</strong> and <strong class="text-white">Techoo Tech</strong> to engineering workflow automation tools and WhatsApp bots at <strong class="text-white">Arfa Karim Technology Incubator (AKTI)</strong>, this series chronicles a journey of relentless execution, technical mastery, and business scaling.
+            </p>
+            <div class="grid grid-cols-2 gap-4 pt-2 border-t border-zinc-800 text-sm">
+                <div><span class="text-gray-500 block">Location:</span> Rawalpindi / Islamabad</div>
+                <div><span class="text-gray-500 block">Core Stack:</span> HTML, CSS, JS, Python, WordPress</div>
+                <div><span class="text-gray-500 block">Active Ventures:</span> D'eeura & Techoo Tech</div>
+                <div><span class="text-gray-500 block">Key Training:</span> PNY (2024), NAVTTC (2025)</div>
+            </div>
+            <div class="pt-4 flex justify-end">
+                <button onclick="closeInfoModal()" class="bg-netflixRed text-white px-6 py-2 rounded font-bold hover:bg-red-700 transition-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl max-w-2xl w-full p-6 sm:p-8 relative space-y-6 animate-in fade-in zoom-in duration-300">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div id="project-modal-content" class="space-y-4">
+                <!-- Dynamic Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Episode Details Modal -->
+    <div id="episode-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl max-w-2xl w-full p-6 sm:p-8 relative space-y-6 animate-in fade-in zoom-in duration-300">
+            <button onclick="closeEpisodeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div id="episode-modal-content" class="space-y-4">
+                <!-- Dynamic Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl max-w-md w-full p-6 sm:p-8 relative space-y-6 animate-in fade-in zoom-in duration-300">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h2 class="heading-font text-3xl text-white">Let's Connect</h2>
+            <p class="text-gray-400 text-sm">Send a message directly or reach out via WhatsApp / Email.</p>
+            <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase text-gray-400 mb-1">Your Name</label>
+                    <input type="text" required class="w-full bg-black border border-zinc-700 rounded p-3 text-white focus:outline-none focus:border-netflixRed">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase text-gray-400 mb-1">Email or Phone</label>
+                    <input type="text" required class="w-full bg-black border border-zinc-700 rounded p-3 text-white focus:outline-none focus:border-netflixRed">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase text-gray-400 mb-1">Message</label>
+                    <textarea rows="3" required class="w-full bg-black border border-zinc-700 rounded p-3 text-white focus:outline-none focus:border-netflixRed"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-netflixRed hover:bg-red-700 text-white py-3 rounded font-bold transition-colors">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-start justify-center pt-20 p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-xl max-w-2xl w-full p-4 relative space-y-4">
+            <div class="flex items-center gap-3 border-b border-zinc-800 pb-3">
+                <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Search skills, projects, businesses (e.g. D'eeura, Python, AKTI)..." class="w-full bg-transparent text-white focus:outline-none text-lg">
+                <button onclick="closeSearchModal()" class="text-gray-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="search-results" class="space-y-2 max-h-96 overflow-y-auto">
+                <p class="text-gray-500 text-sm text-center py-6">Type to search across Danyal's portfolio...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Profile Selection Logic
+        function selectProfile(mode) {
+            const screen = document.getElementById('profile-screen');
+            const app = document.getElementById('main-app');
+            const badge = document.getElementById('active-profile-badge');
+
+            if (mode === 'recruiter') {
+                badge.textContent = 'Recruiter Mode';
+                badge.className = 'inline sm:inline bg-blue-900/80 text-blue-200 px-2 py-0.5 rounded text-xs';
+            } else if (mode === 'client') {
+                badge.textContent = 'Client Mode';
+                badge.className = 'inline sm:inline bg-amber-900/80 text-amber-200 px-2 py-0.5 rounded text-xs';
+            } else {
+                badge.textContent = 'Danyal Mode';
+                badge.className = 'inline sm:inline bg-red-900/80 text-red-200 px-2 py-0.5 rounded text-xs';
+            }
+
+            screen.style.opacity = '0';
+            setTimeout(() => {
+                screen.style.display = 'none';
+                app.style.opacity = '1';
+            }, 500);
+        }
+
+        function switchProfile() {
+            const screen = document.getElementById('profile-screen');
+            const app = document.getElementById('main-app');
+            app.style.opacity = '0';
+            setTimeout(() => {
+                screen.style.display = 'flex';
+                screen.style.opacity = '1';
+            }, 300);
+        }
+
+        // Seasons Data
+        const seasonsData = {
+            "1": [
+                { ep: 1, title: "The First Circuit", desc: "Mastering iPhone hardware repair and mobile device diagnostics in Rawalpindi.", duration: "42m", img: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?q=80&w=600&auto=format&fit=crop" },
+                { ep: 2, title: "Visual Basics", desc: "Foundations of graphic design, brand posters, and visual communication.", duration: "38m", img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=600&auto=format&fit=crop" }
+            ],
+            "2": [
+                { ep: 1, title: "PNY Training Institute 2024", desc: "Professional bootcamp diving deep into Web Development, Freelancing, and advanced Graphic Design.", duration: "50m", img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop" },
+                { ep: 2, title: "First Lines of Code", desc: "Building responsive HTML/CSS layouts and discovering JavaScript interactivity.", duration: "45m", img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" }
+            ],
+            "3": [
+                { ep: 1, title: "D'eeura Perfumes Launched", desc: "Founding D'eeura, a premium perfume brand specializing in Arabian and European fragrances (Lattafa, Armaf, Afnan) with COD across Pakistan.", duration: "55m", img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?q=80&w=600&auto=format&fit=crop" },
+                { ep: 2, title: "Techoo Tech Expansion", desc: "Scaling Techoo Tech phone accessories with a physical shop, WordPress site, and Daraz store.", duration: "48m", img: "https://images.unsplash.com/photo-1585060544812-6b45742d762f?q=80&w=600&auto=format&fit=crop" }
+            ],
+            "4": [
+                { ep: 1, title: "NAVTTC Digital Marketing 2025", desc: "Mastering SEO, Meta Ads, and digital growth strategies through the official NAVTTC program.", duration: "45m", img: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?q=80&w=600&auto=format&fit=crop" },
+                { ep: 2, title: "Impact at AKTI", desc: "Working at Arfa Karim Technology Incubator (AKTI), Rawalpindi — building attendance scripts, admission sheet automations, and WhatsApp lead bots.", duration: "52m", img: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=600&auto=format&fit=crop" }
+            ]
+        };
+
+        function renderSeason(seasonNum) {
+            const container = document.getElementById('episodes-container');
+            const episodes = seasonsData[seasonNum];
+            container.innerHTML = '';
+
+            episodes.forEach(ep => {
+                const card = document.createElement('div');
+                card.className = "bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden card-scale cursor-pointer group";
+                card.onclick = () => openEpisodeModal(seasonNum, ep);
+                card.innerHTML = `
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="${ep.img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="w-12 h-12 rounded-full bg-netflixRed flex items-center justify-center shadow-lg">
+                                <i data-lucide="play" class="w-6 h-6 fill-current text-white ml-0.5"></i>
+                            </div>
+                        </div>
+                        <span class="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 rounded">${ep.duration}</span>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <div class="flex items-center justify-between text-xs text-netflixGray">
+                            <span class="font-bold text-netflixRed">Episode ${ep.ep}</span>
+                            <span>Season ${seasonNum}</span>
+                        </div>
+                        <h3 class="heading-font text-xl text-white">${ep.title}</h3>
+                        <p class="text-gray-400 text-sm line-clamp-2">${ep.desc}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function changeSeason(val) {
+            renderSeason(val);
+        }
+
+        // Initialize Season 4 by default
+        renderSeason("4");
+
+        // Projects Data & Modals
+        const projectsData = {
+            "deeaura": {
+                title: "D'eeura Perfume Store",
+                category: "E-Commerce / Live Production",
+                desc: "D'eeura is a premium perfume store offering top Arabian and European fragrance brands (Lattafa, Armaf, Afnan, Rasasi, Khadlaj) with Cash on Delivery across Pakistan.",
+                link: "http://deeaura.netlify.app/",
+                tags: ["HTML/CSS/JS", "Netlify", "E-Commerce", "COD Operations"],
+                img: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?q=80&w=800&auto=format&fit=crop"
+            },
+            "techoo": {
+                title: "Techoo Tech Store",
+                category: "Retail & Multi-Channel E-Commerce",
+                desc: "Phone accessories business combining a physical storefront in Rawalpindi/Islamabad, a Daraz seller account, and a custom WordPress website.",
+                link: "#",
+                tags: ["WordPress", "Daraz", "Retail", "Inventory Management"],
+                img: "https://images.unsplash.com/photo-1585060544812-6b45742d762f?q=80&w=800&auto=format&fit=crop"
+            },
+            "whatsapp": {
+                title: "AKTI WhatsApp Lead-Capture Bot",
+                category: "Automation & Messaging",
+                desc: "Automated WhatsApp chatbot engineered for Arfa Karim Technology Incubator (AKTI) to streamline incoming student inquiries, course details, and lead logging.",
+                link: "#",
+                tags: ["Python", "WhatsApp API", "Lead Generation", "AKTI"],
+                img: "https://images.unsplash.com/photo-1611746872915-64382b5c76da?q=80&w=800&auto=format&fit=crop"
+            },
+            "automation": {
+                title: "Institute Automation Tools",
+                category: "Python Productivity Suite",
+                desc: "Custom Python document generation and spreadsheet automation scripts built for AKTI, handling automated attendance logging, admission officers' tracking sheets, and FAQ sheet management.",
+                link: "#",
+                tags: ["Python", "Document Generation", "Excel/Sheets Automation"],
+                img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"
+            },
+            "meta": {
+                title: "Meta Lead-Gen Poster Ads",
+                category: "Digital Marketing & Design",
+                desc: "High-impact visual poster advertisements and targeted campaign assets designed for Facebook and Instagram to drive student enrollment and product sales.",
+                link: "#",
+                tags: ["Graphic Design", "Meta Ads", "Social Media Marketing"],
+                img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop"
+            },
+            "media": {
+                title: "AKTI Promo Videos & Posters",
+                category: "Media Production",
+                desc: "Cinematic video editing, motion graphics, and promotional branding posters created for events and courses at Arfa Karim Technology Incubator.",
+                link: "#",
+                tags: ["Video Editing", "Branding", "Poster Design"],
+                img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=800&auto=format&fit=crop"
+            }
+        };
+
+        function openProjectModal(key) {
+            const p = projectsData[key];
+            const modal = document.getElementById('project-modal');
+            const content = document.getElementById('project-modal-content');
+
+            content.innerHTML = `
+                <div class="relative h-60 rounded-lg overflow-hidden mb-4">
+                    <img src="${p.img}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
+                </div>
+                <span class="text-xs text-netflixRed font-bold uppercase tracking-wider">${p.category}</span>
+                <h2 class="heading-font text-3xl text-white">${p.title}</h2>
+                <p class="text-gray-300 text-sm leading-relaxed">${p.desc}</p>
+                <div class="flex flex-wrap gap-2 pt-2">
+                    ${p.tags.map(t => `<span class="bg-zinc-800 text-gray-300 px-3 py-1 rounded text-xs">${t}</span>`).join('')}
+                </div>
+                <div class="pt-4 flex items-center gap-4">
+                    ${p.link !== '#' ? `<a href="${p.link}" target="_blank" class="bg-netflixRed hover:bg-red-700 text-white px-6 py-2.5 rounded font-bold flex items-center gap-2 transition-colors"><i data-lucide="external-link" class="w-4 h-4"></i> Visit Live Site</a>` : ''}
+                    <button onclick="closeProjectModal()" class="bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-2.5 rounded font-bold transition-colors">Close</button>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function openEpisodeModal(seasonNum, ep) {
+            const modal = document.getElementById('episode-modal');
+            const content = document.getElementById('episode-modal-content');
+
+            content.innerHTML = `
+                <div class="relative h-60 rounded-lg overflow-hidden mb-4">
+                    <img src="${ep.img}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
+                    <span class="absolute top-3 left-3 bg-netflixRed text-white text-xs font-bold px-2.5 py-1 rounded">Season ${seasonNum} : Episode ${ep.ep}</span>
+                </div>
+                <h2 class="heading-font text-3xl text-white">${ep.title}</h2>
+                <p class="text-gray-300 text-sm leading-relaxed">${ep.desc}</p>
+                <div class="flex items-center gap-4 text-xs text-netflixGray pt-2">
+                    <span>Duration: ${ep.duration}</span>
+                    <span>Starring: Danyal</span>
+                    <span>Location: Rawalpindi / Islamabad</span>
+                </div>
+                <div class="pt-4 flex justify-end">
+                    <button onclick="closeEpisodeModal()" class="bg-netflixRed text-white px-6 py-2.5 rounded font-bold hover:bg-red-700 transition-colors">Close Episode</button>
+                </div>
+            `;
+            modal.classList.remove('flex');
+            modal.classList.add('flex');
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeEpisodeModal() {
+            const modal = document.getElementById('episode-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // Info Modal
+        function openInfoModal() {
+            const m = document.getElementById('info-modal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+        function closeInfoModal() {
+            const m = document.getElementById('info-modal');
+            m.classList.remove('flex');
+            m.classList.add('hidden');
+        }
+
+        // Business Modal
+        function openBusinessModal() {
+            openProjectModal('deeaura');
+        }
+
+        // Contact Modal
+        function openContactModal() {
+            const m = document.getElementById('contact-modal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+        function closeContactModal() {
+            const m = document.getElementById('contact-modal');
+            m.classList.remove('flex');
+            m.classList.add('hidden');
+        }
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert("Thank you! Your message has been sent to Danyal successfully.");
+            closeContactModal();
+        }
+
+        // Search Modal
+        function openSearchModal() {
+            const m = document.getElementById('search-modal');
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+            document.getElementById('search-input').focus();
+        }
+        function closeSearchModal() {
+            const m = document.getElementById('search-modal');
+            m.classList.remove('flex');
+            m.classList.add('hidden');
+        }
+
+        const searchableItems = [
+            { title: "D'eeura Perfumes", type: "Business / Project", action: () => { closeSearchModal(); openProjectModal('deeaura'); } },
+            { title: "Techoo Tech", type: "Business / Project", action: () => { closeSearchModal(); openProjectModal('techoo'); } },
+            { title: "AKTI WhatsApp Bot", type: "Automation Project", action: () => { closeSearchModal(); openProjectModal('whatsapp'); } },
+            { title: "Python & Sheet Automation", type: "Skill / Tool", action: () => { closeSearchModal(); scrollToSection('skills'); } },
+            { title: "PNY Training 2024", type: "Certification", action: () => { closeSearchModal(); scrollToSection('certifications'); } },
+            { title: "NAVTTC Digital Marketing 2025", type: "Certification", action: () => { closeSearchModal(); scrollToSection('certifications'); } },
+            { title: "Graphic Design & Poster Ads", type: "Skill", action: () => { closeSearchModal(); scrollToSection('skills'); } }
+        ];
+
+        function handleSearch(query) {
+            const resContainer = document.getElementById('search-results');
+            if (!query.trim()) {
+                resContainer.innerHTML = '<p class="text-gray-500 text-sm text-center py-6">Type to search across Danyal\'s portfolio...</p>';
+                return;
+            }
+            const filtered = searchableItems.filter(i => i.title.toLowerCase().includes(query.toLowerCase()) || i.type.toLowerCase().includes(query.toLowerCase()));
+            if (filtered.length === 0) {
+                resContainer.innerHTML = '<p class="text-gray-400 text-sm text-center py-6">No matches found for "' + query + '"</p>';
+                return;
+            }
+            resContainer.innerHTML = filtered.map(item => `
+                <div onclick="(${item.action.toString()})()" class="p-3 hover:bg-zinc-800 rounded cursor-pointer flex items-center justify-between transition-colors">
+                    <span class="text-white font-medium">${item.title}</span>
+                    <span class="text-xs text-netflixRed bg-zinc-800 px-2 py-1 rounded">${item.type}</span>
+                </div>
+            `).join('');
+        }
+
+        // Accordion for Skills
+        function toggleAccordion(id) {
+            const content = document.getElementById('content-' + id);
+            const icon = document.getElementById('icon-' + id);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Smooth scroll helper
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
